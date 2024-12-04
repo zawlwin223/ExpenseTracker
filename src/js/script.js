@@ -1,6 +1,6 @@
 import * as view from './view'
 import * as model from './model'
-console.log('Ho la it is not working')
+
 const render = function () {
   //render chart
   view.getChart()
@@ -8,8 +8,13 @@ const render = function () {
   view.addCategory(model.state.category)
 }
 
+const addExpenseTomoel = function (expense) {
+  model.addExpense(expense)
+  console.log(model.state.expense)
+}
+
 function init() {
-  console.log('Everything is not working')
+  view.submitExpenseHandler(addExpenseTomoel)
   render()
 }
 init()

@@ -36,7 +36,7 @@ export const addCategory = function (categoryOptions) {
   })
 }
 
-export const submitExpense = function () {
+export const submitExpenseHandler = function (control) {
   submit.addEventListener('click', function (e) {
     e.preventDefault()
     console.log('This is not testing')
@@ -50,6 +50,6 @@ export const submitExpense = function () {
     amount.value = ''
     category.value = ''
     date.value = ''
+    control(expense)
   })
 }
-submitExpense()

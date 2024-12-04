@@ -1,7 +1,7 @@
 {
   "name": "expensetracker",
   "version": "1.0.0",
-  "default": "index.js",
+  "default": "index.html",
   "scripts": {
     "start": " parcel index.html"
   },
