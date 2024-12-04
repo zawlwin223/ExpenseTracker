@@ -14,18 +14,22 @@
         <input type="text" class="expenseName" placeholder="Expense Name" />
         <input type="text" class="amount" placeholder="Amount" />
         <select class="category" name="Select Category" id="">
-          <option value="Smt">Hello World</option>
+          <option>Select Category</option>
         </select>
         <input class="date" type="date" />
         <button type="submit">Add Expense</button>
       </form>
+
+      <div class="canvas">
+        <canvas id="myChart"></canvas>
+      </div>
       <!-- <div>Section for graph</div> -->
       <p class="totalPrice">Total: <span class="price">$1000</span></p>
       <div class="sort">
         <div>
           <p>Filer By Category</p>
-          <select name="" id="">
-            <option value="">Food</option>
+          <select class="categoryFilter" name="" id="">
+            <option>Filter Category</option>
           </select>
         </div>
       </div>

@@ -1,11 +1,17 @@
 {
   "name": "expensetracker",
   "version": "1.0.0",
-  "main": "index.js",
+  "default": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": " parcel index.html"
   },
   "author": "Zaw Lwin Phyo",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "chart.js": "^4.4.7"
+  },
+  "devDependencies": {
+    "parcel": "^2.13.2"
+  }
 }
