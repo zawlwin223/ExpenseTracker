@@ -1,3 +1,6 @@
+/* @import '_./node_modules/tabulator-tables/dist/css/tabulator.css_'; */
+@import '../node_modules/tabulator-tables/dist/css/tabulator.css';
+/* @layer expenseTracker; */
 @layer expenseTracker {
   * {
     margin: 0;
@@ -6,11 +9,15 @@
   }
   body {
     background-color: #ffcfef;
+    /* background-color: black; */
     display: flex;
     justify-content: center;
+    padding-inline: 50px;
+    padding-block: 50px;
+    gap: 50px;
 
     .expenseTracker {
-      margin-top: 50px;
+      flex: 1;
       padding-inline: 20px;
       padding-block: 20px;
       display: flex;
@@ -73,6 +80,17 @@
         color: white;
         background-color: white;
         width: 100%;
+      }
+    }
+    .expenseList {
+      display: flex;
+      /* justify-content: center; */
+      gap: 10px;
+      align-items: center;
+      flex-direction: column;
+      flex: 1;
+      #example-table {
+        background-color: black; /* Set your desired color */
       }
     }
   }

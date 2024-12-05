@@ -8,13 +8,13 @@ const render = function () {
   view.addCategory(model.state.category)
 }
 
-const addExpenseTomoel = function (expense) {
+const addExpenseTomodel = function (expense) {
   model.addExpense(expense)
-  console.log(model.state.expense)
+  view.addExpenseToTable(model.state.expense)
 }
 
 function init() {
-  view.submitExpenseHandler(addExpenseTomoel)
+  view.submitExpenseHandler(addExpenseTomodel)
   render()
 }
 init()
