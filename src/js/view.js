@@ -6,13 +6,9 @@ const expenseName = document.querySelector('.expenseName')
 const amount = document.querySelector('.amount')
 const category = document.querySelector('.category')
 const date = document.querySelector('.date')
-const categoryFilter = document.querySelector('.categoryFilter')
+const filterDate = document.querySelector('.filterDate')
 const myTable = document.querySelector('#example-table')
-
-// const tableData = [
-//   { expenseName: 1, amount: 'John Doe', category: 28, date: 22 },
-//   { expenseName: 1, amount: 'John Doe', category: 28, date: 22 },
-// ]
+let myChart
 
 export const addExpenseToTable = function (tableData = 'No Data Yet') {
   new Tabulator(myTable, {
@@ -31,15 +27,15 @@ export const addExpenseToTable = function (tableData = 'No Data Yet') {
   })
 }
 
-export const getChart = function () {
-  new Chart(ctx, {
+export const getChart = function (category, initialExpense = [0, 0, 0, 0]) {
+  myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: category,
       datasets: [
         {
           label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
+          data: initialExpense, //state.expense.count,
           borderWidth: 1,
         },
       ],
@@ -57,19 +53,19 @@ export const getChart = function () {
 export const addCategory = function (categoryOptions) {
   categoryOptions.forEach((el) => {
     category.innerHTML += `<option value=${el}>${el}</option>`
-    categoryFilter.innerHTML += `<option value=${el}>${el}</option>`
+    // categoryFilter.innerHTML += `<option value=${el}>${el}</option>`
   })
 }
 
 export const submitExpenseHandler = function (control) {
   submit.addEventListener('click', function (e) {
     e.preventDefault()
-    console.log('This is not testing')
     const expense = {
       expenseName: expenseName.value,
       amount: amount.value,
       category: category.value,
       date: date.value,
+      count: 0,
     }
     expenseName.value = ''
     amount.value = ''
@@ -77,4 +73,23 @@ export const submitExpenseHandler = function (control) {
     date.value = ''
     control(expense)
   })
+}
+
+export const filterDateHandler = function (control) {
+  filterDate.addEventListener('change', function () {
+    control(myChart, this.value)
+  })
+}
+
+export const updateChart = function (state, chart, date) {
+  const expenseSortByDate = state.expense
+    .filter((expense) => expense.date === date)
+    .map((expense) => expense.category)
+  console.log(expenseSortByDate)
+  // console.log(state.expense)
+  const fakeData = [2, 10, 9, 10]
+  chart.data.datasets[0].data = fakeData
+  // chart.data.datasets[0] = fakeData
+
+  myChart.update()
 }
