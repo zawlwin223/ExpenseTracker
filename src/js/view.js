@@ -1,7 +1,7 @@
 import Chart, { DoughnutController } from 'chart.js/auto'
 import { TabulatorFull as Tabulator } from 'tabulator-tables'
 const ctx = document.getElementById('myChart')
-const submit = document.querySelector('button[type=submit]')
+const submit = document.querySelector('.submit')
 const expenseName = document.querySelector('.expenseName')
 const amount = document.querySelector('.amount')
 const category = document.querySelector('.category')
@@ -27,7 +27,8 @@ export const addExpenseToTable = function (tableData = 'No Data Yet') {
   })
 }
 
-export const getChart = function (category, initialExpense = [0, 0, 0, 0]) {
+export const getChart = function (category) {
+  const initialExpense = category.map((_) => 0)
   myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -65,7 +66,6 @@ export const submitExpenseHandler = function (control) {
       amount: amount.value,
       category: category.value,
       date: date.value,
-      count: 0,
     }
     expenseName.value = ''
     amount.value = ''
@@ -82,14 +82,25 @@ export const filterDateHandler = function (control) {
 }
 
 export const updateChart = function (state, chart, date) {
+  const initialExpense = state.category.reduce((arr, cete) => {
+    console.log(cete)
+    arr[cete] = 0
+    return arr
+  }, {})
+
   const expenseSortByDate = state.expense
     .filter((expense) => expense.date === date)
     .map((expense) => expense.category)
-  console.log(expenseSortByDate)
-  // console.log(state.expense)
-  const fakeData = [2, 10, 9, 10]
-  chart.data.datasets[0].data = fakeData
-  // chart.data.datasets[0] = fakeData
+    .reduce((acc, item) => {
+      acc[item] = (acc[item] || 0) + 1
+      return acc
+    }, {})
 
+  Object.entries(expenseSortByDate).forEach((expense) => {
+    initialExpense[expense[0]] = expense[1]
+  })
+
+  const finalArray = Object.values(initialExpense)
+  chart.data.datasets[0].data = finalArray
   myChart.update()
 }

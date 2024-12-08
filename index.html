@@ -13,13 +13,17 @@
     <section class="expenseTracker">
       <h2>Expense Tracker</h2>
       <form action="">
-        <input type="text" class="expenseName" placeholder="Expense Name" />
-        <input type="text" class="amount" placeholder="Amount" />
-        <select class="category" name="Select Category" id="">
+        <input
+          type="text"
+          class="expenseName"
+          placeholder="Expense Name"
+          required />
+        <input type="text" class="amount" placeholder="Amount" required />
+        <select class="category" name="Select Category" required>
           <option>Select Category</option>
         </select>
-        <input class="date" type="date" />
-        <button type="submit">Add Expense</button>
+        <input class="date" type="date" required />
+        <input class="submit" type="submit" value="Submit" />
       </form>
 
       <div class="canvas">
