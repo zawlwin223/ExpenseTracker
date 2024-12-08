@@ -1,3 +1,4 @@
+'use strict'
 import * as view from './view'
 import * as model from './model'
 
@@ -6,6 +7,10 @@ const render = function () {
   view.getChart(model.state.category)
   //add category
   view.addCategory(model.state.category)
+
+  view.addExpenseToTable(model.state.expense)
+
+  view.addPrice(model.state.expense)
 }
 
 const addExpenseTomodel = function (expense) {
@@ -22,5 +27,6 @@ function init() {
   render()
   view.submitExpenseHandler(addExpenseTomodel)
   view.filterDateHandler(filterControl)
+  view.categoryChangeHandler()
 }
 init()

@@ -1,4 +1,4 @@
-import Chart, { DoughnutController } from 'chart.js/auto'
+import Chart from 'chart.js/auto'
 import { TabulatorFull as Tabulator } from 'tabulator-tables'
 const ctx = document.getElementById('myChart')
 const submit = document.querySelector('.submit')
@@ -8,9 +8,43 @@ const category = document.querySelector('.category')
 const date = document.querySelector('.date')
 const filterDate = document.querySelector('.filterDate')
 const myTable = document.querySelector('#example-table')
+const price = document.querySelector('.price')
 let myChart
 
+const addSelectOptionToCategory = function () {
+  const selectCategory = document.createElement('option')
+  // newOption.value = '1';
+  selectCategory.textContent = 'Select Category'
+
+  // Insert the new option as the first child
+  category.insertBefore(selectCategory, category.firstChild)
+}
+
+const removeSelectOptionFromCategory = category.addEventListener(
+  'click',
+  function (e) {
+    // Remove the first <option>
+    if (this.options.length > 0) {
+      if (this.options[0].textContent === 'Select Category') {
+        this.options[0].remove()
+      }
+    }
+  }
+)
+
+export const categoryChangeHandler = function () {
+  removeSelectOptionFromCategory()
+}
+export const addPrice = function (state) {
+  let initialPrice = 0
+  state.forEach((exp) => {
+    initialPrice += +exp.amount
+    price.innerHTML = initialPrice
+  })
+}
+
 export const addExpenseToTable = function (tableData = 'No Data Yet') {
+  // console.log(tableData)
   new Tabulator(myTable, {
     data: tableData,
     autoColumns: true,
@@ -60,18 +94,26 @@ export const addCategory = function (categoryOptions) {
 
 export const submitExpenseHandler = function (control) {
   submit.addEventListener('click', function (e) {
-    e.preventDefault()
-    const expense = {
-      expenseName: expenseName.value,
-      amount: amount.value,
-      category: category.value,
-      date: date.value,
+    // e.preventDefault()
+    if (
+      !expenseName.value === '' &&
+      !amount.value === '' &&
+      !category.value === '' &&
+      !date.value === ''
+    ) {
+      const expense = {
+        expenseName: expenseName.value,
+        amount: amount.value,
+        category: category.value,
+        date: date.value,
+      }
+      expenseName.value = ''
+      amount.value = ''
+      category.value = ''
+      date.value = ''
+      control(expense)
+      addSelectOptionToCategory()
     }
-    expenseName.value = ''
-    amount.value = ''
-    category.value = ''
-    date.value = ''
-    control(expense)
   })
 }
 
@@ -83,20 +125,22 @@ export const filterDateHandler = function (control) {
 
 export const updateChart = function (state, chart, date) {
   const initialExpense = state.category.reduce((arr, cete) => {
-    console.log(cete)
     arr[cete] = 0
     return arr
   }, {})
 
-  const expenseSortByDate = state.expense
-    .filter((expense) => expense.date === date)
+  const expenseSortByDate = state.expense.filter(
+    (expense) => expense.date === date
+  )
+  addPrice(expenseSortByDate)
+  const expenseArray = expenseSortByDate
     .map((expense) => expense.category)
     .reduce((acc, item) => {
       acc[item] = (acc[item] || 0) + 1
       return acc
     }, {})
 
-  Object.entries(expenseSortByDate).forEach((expense) => {
+  Object.entries(expenseArray).forEach((expense) => {
     initialExpense[expense[0]] = expense[1]
   })
 

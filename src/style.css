@@ -40,8 +40,9 @@
 
         input,
         select {
+          width: 170px;
           padding-block: 7px;
-          padding-inline: 7px;
+          padding-inline: 10px;
           border: none;
           border-radius: 5px;
         }
