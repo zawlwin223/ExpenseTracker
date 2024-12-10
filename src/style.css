@@ -90,9 +90,39 @@
       align-items: center;
       flex-direction: column;
       flex: 1;
-      #example-table {
-        background-color: black; /* Set your desired color */
-      }
     }
+  }
+}
+
+@layer tabulatorCustom {
+  .tabulator {
+    width: 100%;
+    border: none !important;
+    border-radius: 5px !important;
+    /* padding: 20px; */
+  }
+  .tabulator
+    .tabulator-header
+    .tabulator-col.tabulator-sortable[aria-sort='none']
+    .tabulator-col-content
+    .tabulator-col-sorter {
+    display: none !important;
+  }
+
+  .tabulator .tabulator-header .tabulator-col {
+    background-color: #0a97b0 !important;
+    color: white;
+  }
+  .tabulator-row {
+    padding-block: 5px !important;
+    border: none !important;
+  }
+
+  .tabulator .tabulator-header {
+    padding-block: 5px;
+    background-color: #0a97b0 !important;
+  }
+  .tabulator-cell[tabulator-field='Delete'] {
+    color: red !important;
   }
 }

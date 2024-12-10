@@ -17,16 +17,30 @@ const addExpenseTomodel = function (expense) {
   model.addExpense(expense)
 
   view.addExpenseToTable(model.state.expense)
+  view.addPrice(model.state.expense)
+  view.updateChart(model.state)
 }
-const filterControl = function (myChart, date) {
-  view.updateChart(model.state, myChart, date)
+const filterControl = function (date) {
+  model.addUserSelectedDate(date)
+  view.updateChart(model.state)
   // view.getChart(model.state.category, [10, 5, 7, 9])
+}
+
+const removeSelectOption = function () {
+  view.removeSelectOption()
+}
+
+const delExpense = function (id) {
+  const deletedId = id
+  model.deleteExpense(deletedId)
+  view.updateChart(model.state)
 }
 
 function init() {
   render()
+  view.deleteHandler(delExpense)
   view.submitExpenseHandler(addExpenseTomodel)
   view.filterDateHandler(filterControl)
-  view.categoryChangeHandler()
+  view.categoryChangeHandler(removeSelectOption)
 }
 init()
