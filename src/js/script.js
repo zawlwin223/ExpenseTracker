@@ -23,7 +23,8 @@ const addExpenseTomodel = function (expense) {
 const filterControl = function (date) {
   model.addUserSelectedDate(date)
   view.updateChart(model.state)
-  // view.getChart(model.state.category, [10, 5, 7, 9])
+  console.log(model.state.expenseSortByDate)
+  view.addPrice(model.state.expenseSortByDate)
 }
 
 const removeSelectOption = function () {
@@ -34,13 +35,14 @@ const delExpense = function (id) {
   const deletedId = id
   model.deleteExpense(deletedId)
   view.updateChart(model.state)
+  view.addPrice(model.state.expenseSortByDate || model.state.expense)
 }
 
 function init() {
   render()
-  view.deleteHandler(delExpense)
   view.submitExpenseHandler(addExpenseTomodel)
   view.filterDateHandler(filterControl)
   view.categoryChangeHandler(removeSelectOption)
+  view.deleteHandler(delExpense)
 }
 init()

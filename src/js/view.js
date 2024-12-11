@@ -40,15 +40,16 @@ export const categoryChangeHandler = function (control) {
 }
 export const addPrice = function (state) {
   let initialPrice = 0
+  console.log('This is prcie section')
+  console.log(state)
   state.forEach((exp) => {
     initialPrice += +exp.amount
-    price.innerHTML = initialPrice
   })
+  price.innerHTML = initialPrice
 }
 
 export const addExpenseToTable = function (tableData = 'No Data Yet') {
   tableData.forEach((data) => (data['Delete'] = 'Delete'))
-  console.log(tableData)
   new Tabulator(myTable, {
     data: tableData,
     layout: 'fitColumns',
@@ -143,13 +144,12 @@ export const submitExpenseHandler = function (control) {
     amount.value = ''
     category.value = ''
     date.value = ''
-    console.log(expense)
     control(expense)
     addSelectOptionToCategory()
   })
 }
 
-export const filterDateHandler = function (control) {
+export const filterDateHandler = function (control, state) {
   filterDate.addEventListener('change', function () {
     control(this.value)
   })
@@ -164,7 +164,7 @@ export const updateChart = function (state) {
   const expenseSortByDate = state.expense.filter(
     (expense) => expense.date === state.date
   )
-  addPrice(expenseSortByDate)
+
   const expenseArray = expenseSortByDate
     .map((expense) => expense.category)
     .reduce((acc, item) => {

@@ -9,14 +9,21 @@ export const addExpense = function (expense) {
 }
 
 export const deleteExpense = function (id) {
-  console.log('Hello World')
   const getIndex = state.expense.findIndex((exp) => exp.id === id)
   state.expense.splice(getIndex, 1)
-
-  console.log(state.expense)
   localStorage.setItem('expense', JSON.stringify(state.expense))
+  if (!state.expenseSortByDate) return
+  const getIndexSorted = state.expenseSortByDate.findIndex(
+    (exp) => exp.id === id
+  )
+  state.expenseSortByDate.splice(getIndexSorted, 1)
 }
 
 export const addUserSelectedDate = function (date) {
   state.date = date
+  const expenseSortByDate = state.expense.filter(
+    (expense) => expense.date === state.date
+  )
+  state.expenseSortByDate = expenseSortByDate
+  console.log(state.expenseSortByDate)
 }
