@@ -5,7 +5,6 @@ export const state = {
 export const addExpense = function (expense) {
   state.expense.push(expense)
   localStorage.setItem('expense', JSON.stringify(state.expense))
-  console.log(state.expense)
 }
 
 export const deleteExpense = function (id) {
@@ -16,7 +15,9 @@ export const deleteExpense = function (id) {
   const getIndexSorted = state.expenseSortByDate.findIndex(
     (exp) => exp.id === id
   )
+  console.log(state.expenseSortByDate)
   state.expenseSortByDate.splice(getIndexSorted, 1)
+  console.log(state.expenseSortByDate)
 }
 
 export const addUserSelectedDate = function (date) {
@@ -25,5 +26,4 @@ export const addUserSelectedDate = function (date) {
     (expense) => expense.date === state.date
   )
   state.expenseSortByDate = expenseSortByDate
-  console.log(state.expenseSortByDate)
 }
