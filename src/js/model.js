@@ -15,9 +15,9 @@ export const deleteExpense = function (id) {
   const getIndexSorted = state.expenseSortByDate.findIndex(
     (exp) => exp.id === id
   )
-  console.log(state.expenseSortByDate)
+
+  if (getIndexSorted < 0) return
   state.expenseSortByDate.splice(getIndexSorted, 1)
-  console.log(state.expenseSortByDate)
 }
 
 export const addUserSelectedDate = function (date) {

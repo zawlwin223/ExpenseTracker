@@ -17,7 +17,7 @@ const addExpenseTomodel = function (expense) {
   model.addExpense(expense)
 
   view.addExpenseToTable(model.state.expense)
-  view.addPrice(model.state.expense)
+  view.addPrice(model.state.expenseSortByDate || model.state.expense)
   view.updateChart(model.state)
 }
 const filterControl = function (date) {

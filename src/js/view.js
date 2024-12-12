@@ -38,46 +38,31 @@ export const categoryChangeHandler = function (control) {
   control()
   // removeSelectOptionFromCategory()
 }
+
+const priceCalculation = function (expense) {
+  let initialPrice = 0
+  expense.forEach((exp) => {
+    initialPrice += +exp.amount
+  })
+  price.innerHTML = initialPrice
+}
 export const addPrice = function (state, id = null) {
   //this is user delete expense and sorted by date
   if (state.expenseSortByDate && id !== null) {
-    console.log('user sort and delete')
-    let initialPrice = 0
-    console.log(state.expenseSortByDate)
-    state.expenseSortByDate.forEach((exp) => {
-      initialPrice += +exp.amount
-    })
-    price.innerHTML = initialPrice
+    priceCalculation(state.expenseSortByDate)
   }
   //this is user delete but without sorted by date
   if (!state.expenseSortByDate && id !== null) {
-    console.log('User delte withoud sort')
-    let initialPrice = 0
-
-    state.expense.forEach((exp) => {
-      initialPrice += +exp.amount
-    })
-    price.innerHTML = initialPrice
+    priceCalculation(state.expense)
   }
   //this is user sort by date
   if (state.expenseSortByDate && id === null) {
-    console.log('sort by date')
-    let initialPrice = 0
-
-    state.expenseSortByDate.forEach((exp) => {
-      initialPrice += +exp.amount
-    })
-    price.innerHTML = initialPrice
+    priceCalculation(state.expenseSortByDate)
   }
 
   //this is initial state
   if (!state.expenseSortByDate && id === null) {
-    console.log('Initital State')
-    let initialPrice = 0
-    state.forEach((exp) => {
-      initialPrice += +exp.amount
-    })
-    price.innerHTML = initialPrice
+    priceCalculation(state)
   }
 }
 
