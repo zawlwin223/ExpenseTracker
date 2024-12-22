@@ -94,6 +94,41 @@
   }
 }
 
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    padding-inline: 20px;
+    padding-block: 20px;
+    gap: 20px;
+  }
+  .expenseTracker {
+    width: 100%;
+    padding-inline: 10px;
+    padding-block: 10px;
+  }
+  form {
+    flex-direction: column;
+    gap: 5px;
+  }
+  input,
+  select {
+    width: 100%;
+  }
+  .submit {
+    width: 100%;
+  }
+  .sort div {
+    flex-direction: column;
+    gap: 5px;
+  }
+  .canvas {
+    margin-top: 20px;
+  }
+  .expenseList {
+    width: 100%;
+  }
+}
+
 @layer tabulatorCustom {
   .tabulator {
     width: 100%;
